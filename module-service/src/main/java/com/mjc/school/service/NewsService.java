@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewsService {
+		public static final String NEWS_TXT = "module-repository/src/main/resources/news.txt";
 		private final NewsMapper newsMapper = new NewsMapperImpl();
 		public List<NewsDTO> getAllNews() {
 				List<News> newsList = NewsParser.parseNewsFromFile();
@@ -35,7 +36,7 @@ public class NewsService {
 				if (!InputValidator.validateProperLengthOfString(newsDTO.getContent(), 5, 255)) {
 						throw new InvalidNewsContentException("Content of message should be between 5 and 255 characters length!");
 				}
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt", true))) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT, true))) {
 						bw.append(NewsParser.newsToString(newsMapper.newsDTOToNews(newsDTO)));
 				} catch (IOException e) {
 						e.printStackTrace();
@@ -55,7 +56,7 @@ public class NewsService {
 				}
 				oldNewsDTO.setContent(newsDTOToSave.getContent());
 				oldNewsDTO.setLastUpdateDate(newsDTOToSave.getLastUpdateDate());
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt"))) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
 						newsList.forEach(n -> {
 								try {
 										bw.write(NewsParser.newsToString(newsMapper.newsDTOToNews(n)) + "\n");
@@ -66,7 +67,7 @@ public class NewsService {
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
-				return newsList.get(Math.toIntExact(oldNewsDTO.getId()));
+				return newsList.get(Math.toIntExact(oldNewsDTO.getId()) - 1);
 		}
 
 		public boolean removeNewsById(Long newsId) throws NoSuchNewsException {
@@ -76,7 +77,7 @@ public class NewsService {
 				}
 				List<NewsDTO> newsList = new ArrayList<>(list);
 				newsList.remove(Math.toIntExact(newsId) - 1);
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt"))) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
 						newsList.forEach(n -> {
 								try {
 										bw.write(NewsParser.newsToString(newsMapper.newsDTOToNews(n)) + "\n");
