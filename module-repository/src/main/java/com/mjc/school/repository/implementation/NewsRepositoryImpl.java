@@ -55,7 +55,7 @@ public class NewsRepositoryImpl implements NewsRepository {
 		}
 
 		@Override
-		public boolean deleteById(long id) {
+		public Boolean deleteById(long id) {
 				List<News> newsList = new ArrayList<>(NewsParser.parseNewsFromFile());
 				newsList.remove(Math.toIntExact(id - 1));
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
@@ -69,6 +69,6 @@ public class NewsRepositoryImpl implements NewsRepository {
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
-				return true;
+				return Boolean.TRUE;
 		}
 }

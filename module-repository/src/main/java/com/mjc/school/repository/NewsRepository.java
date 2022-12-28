@@ -9,5 +9,5 @@ public interface NewsRepository {
 		List<News> readAll();
 		News readById(long id);
 		News update(long id, News updatedNews);
-		boolean deleteById(long id);
+		Boolean deleteById(long id);
 }
