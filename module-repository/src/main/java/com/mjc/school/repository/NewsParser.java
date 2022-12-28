@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class NewsParser {
+		private NewsParser(){}
+
 		public static List<News> parseNewsFromFile() {
 				List<News> list = new ArrayList<>();
 				try (BufferedReader fileReader = new BufferedReader(new FileReader("module-repository/src/main/resources/news.txt"))){

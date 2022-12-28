@@ -1,0 +1,20 @@
+1<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2022-12-22T05:01:28<>2022-12-22T05:01:28<>2
+2<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-18T20:45:21<>2022-12-18T20:45:21<>6
+3<>HOUSING<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-21T15:20:28<>2022-12-21T15:20:28<>5
+4<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-26T23:01:57<>2022-12-26T23:01:57<>2
+5<>RANDOM GIBBERISH<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2022-12-27T04:46:46<>2022-12-27T04:46:46<>6
+6<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-25T06:27:18<>2022-12-25T06:27:18<>2
+7<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-26T23:28:52<>2022-12-26T23:28:52<>1
+8<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2022-12-20T02:17:06<>2022-12-20T02:17:06<>6
+9<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-24T21:33:06<>2022-12-24T21:33:06<>1
+10<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-25T06:54:44<>2022-12-25T06:54:44<>2
+11<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-24T07:30:41<>2022-12-24T07:30:41<>5
+12<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2022-12-24T00:11:22<>2022-12-24T00:11:22<>2
+13<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-21T11:41:56<>2022-12-21T11:41:56<>2
+14<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-23T21:43:01<>2022-12-23T21:43:01<>2
+15<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-19T14:09:46<>2022-12-19T14:09:46<>1
+16<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-23T04:47:43<>2022-12-23T04:47:43<>1
+17<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-24T05:28:16<>2022-12-24T05:28:16<>6
+18<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-23T15:14:49<>2022-12-23T15:14:49<>3
+19<>HOUSING<>Nam vitae egestas velit. Quisque consectetur lacus.<>2022-12-17T23:06:54<>2022-12-17T23:06:54<>2
+20<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2022-12-23T11:38:32<>2022-12-23T11:38:32<>5
