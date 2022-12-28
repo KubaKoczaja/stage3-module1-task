@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class NewsParser {
-		private NewsParser(){}
+public class DataSource {
+		private DataSource(){}
 
 		public static List<News> parseNewsFromFile() {
 				List<News> list = new ArrayList<>();
 				try (BufferedReader fileReader = new BufferedReader(new FileReader("module-repository/src/main/resources/news.txt"))){
-						list = fileReader.lines().map(NewsParser::stringToNews).toList();
+						list = fileReader.lines().map(DataSource::stringToNews).toList();
 				} catch (IOException e) {
 						e.printStackTrace();
 				}

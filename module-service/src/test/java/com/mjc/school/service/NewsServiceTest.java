@@ -1,6 +1,6 @@
 package com.mjc.school.service;
 
-import com.mjc.school.repository.NewsParser;
+import com.mjc.school.repository.DataSource;
 import com.mjc.school.repository.model.News;
 import com.mjc.school.repository.model.dto.NewsDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
@@ -22,11 +22,11 @@ class NewsServiceTest {
 		private final LocalDateTime testDateTime = LocalDateTime.now();
 		private final List<News> testList = List.of(new News(1L, "test", "test", testDateTime, testDateTime, 1L),
 						new News(2L, "test", "test", testDateTime, testDateTime, 1L));
-		private final MockedStatic<NewsParser> newsParserMockedStatic = Mockito.mockStatic(NewsParser.class);
+		private final MockedStatic<DataSource> newsParserMockedStatic = Mockito.mockStatic(DataSource.class);
 
 		@BeforeEach
 		void setUp() {
-				newsParserMockedStatic.when(NewsParser::parseNewsFromFile).thenReturn(testList);
+				newsParserMockedStatic.when(DataSource::parseNewsFromFile).thenReturn(testList);
 		}
 		@AfterEach
 		void tearDown() {

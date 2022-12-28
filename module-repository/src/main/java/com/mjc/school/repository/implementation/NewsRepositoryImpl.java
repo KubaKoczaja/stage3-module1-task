@@ -1,6 +1,6 @@
 package com.mjc.school.repository.implementation;
 
-import com.mjc.school.repository.NewsParser;
+import com.mjc.school.repository.DataSource;
 import com.mjc.school.repository.NewsRepository;
 import com.mjc.school.repository.model.News;
 
@@ -15,7 +15,7 @@ public class NewsRepositoryImpl implements NewsRepository {
 		@Override
 		public News create(News news) {
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT, true))) {
-						bw.append(NewsParser.newsToString(news));
+						bw.append(DataSource.newsToString(news));
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
@@ -24,18 +24,18 @@ public class NewsRepositoryImpl implements NewsRepository {
 
 		@Override
 		public List<News> readAll() {
-				return NewsParser.parseNewsFromFile();
+				return DataSource.parseNewsFromFile();
 		}
 
 		@Override
-		public News readById(long id) {
-				List<News> newsList = NewsParser.parseNewsFromFile();
+		public News readById(Long id) {
+				List<News> newsList = DataSource.parseNewsFromFile();
 				return newsList.get(Math.toIntExact(id - 1));
 		}
 
 		@Override
-		public News update(long id, News updatedNews) {
-				List<News> newsList = NewsParser.parseNewsFromFile();
+		public News update(Long id, News updatedNews) {
+				List<News> newsList = DataSource.parseNewsFromFile();
 				News newsToUpdate = newsList.get(Math.toIntExact(id - 1));
 				newsToUpdate.setTitle(updatedNews.getTitle());
 				newsToUpdate.setContent(updatedNews.getContent());
@@ -43,7 +43,7 @@ public class NewsRepositoryImpl implements NewsRepository {
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
 						newsList.forEach(n -> {
 								try {
-										bw.write(NewsParser.newsToString(n) + "\n");
+										bw.write(DataSource.newsToString(n) + "\n");
 								} catch (IOException e) {
 										e.printStackTrace();
 								}
@@ -55,13 +55,13 @@ public class NewsRepositoryImpl implements NewsRepository {
 		}
 
 		@Override
-		public Boolean deleteById(long id) {
-				List<News> newsList = new ArrayList<>(NewsParser.parseNewsFromFile());
+		public Boolean deleteById(Long id) {
+				List<News> newsList = new ArrayList<>(DataSource.parseNewsFromFile());
 				newsList.remove(Math.toIntExact(id - 1));
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
 						newsList.forEach(n -> {
 								try {
-										bw.write(NewsParser.newsToString(n) + "\n");
+										bw.write(DataSource.newsToString(n) + "\n");
 								} catch (IOException e) {
 										e.printStackTrace();
 								}

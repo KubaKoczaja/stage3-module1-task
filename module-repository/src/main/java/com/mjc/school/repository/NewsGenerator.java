@@ -38,7 +38,7 @@ public class NewsGenerator {
 				try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt"))){
 						newsList.forEach(s -> {
 								try {
-										bufferedWriter.write(NewsParser.newsToString(s) + "\n");
+										bufferedWriter.write(DataSource.newsToString(s) + "\n");
 								} catch (IOException e) {
 										e.printStackTrace();
 								}

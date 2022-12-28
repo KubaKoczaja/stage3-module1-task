@@ -1,7 +1,7 @@
 package com.mjc.school.web;
 
 import com.mjc.school.repository.model.dto.NewsDTO;
-import com.mjc.school.repository.NewsParser;
+import com.mjc.school.repository.DataSource;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,7 +38,7 @@ public class View {
 				System.out.println("Please enter Author Id:");
 				Long authorId = scanner.nextLong();
 				NewsDTO newsDTO = new NewsDTO();
-				newsDTO.setId((long) NewsParser.parseNewsFromFile().size() + 1);
+				newsDTO.setId((long) DataSource.parseNewsFromFile().size() + 1);
 				newsDTO.setTitle(title);
 				newsDTO.setContent(content);
 				newsDTO.setCreateDate(LocalDateTime.now());
