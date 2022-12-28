@@ -1,5 +1,7 @@
 package com.mjc.school.repository;
 
+import com.mjc.school.repository.model.News;
+
 import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -9,18 +11,20 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class NewsGenerator {
+		private NewsGenerator() {		}
+
 		public static void generateNews() {
 				List<News> newsList = new ArrayList<>();
 				List<String> list = new ArrayList<>();
 
-				try (BufferedReader fileReader = new BufferedReader(new FileReader(new File("module-repository/src/main/resources/content.txt")))){
+				try (BufferedReader fileReader = new BufferedReader(new FileReader("module-repository/src/main/resources/content.txt"))){
 						list = fileReader.lines().toList();
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
 				String[] titles = list.get(0).split(",");
 				String[] content = list.subList(1, list.size() - 1).toArray(new String[0]);
-				for (Long i = 1L; i <= 20; i++) {
+				for (long i = 1L; i <= 20; i++) {
 						News news = new News();
 						news.setId(i);
 						news.setTitle(titles[ThreadLocalRandom.current().nextInt(0, titles.length)]);

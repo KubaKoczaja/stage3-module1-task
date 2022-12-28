@@ -1,7 +1,7 @@
 package com.mjc.school.service.mapper;
 
-import com.mjc.school.repository.DTO.NewsDTO;
-import com.mjc.school.repository.News;
+import com.mjc.school.repository.model.dto.NewsDTO;
+import com.mjc.school.repository.model.News;
 import org.mapstruct.Mapper;
 
 @Mapper

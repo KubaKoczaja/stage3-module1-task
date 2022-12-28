@@ -1,33 +1,29 @@
 package com.mjc.school.service;
 
-import com.mjc.school.repository.DTO.NewsDTO;
-import com.mjc.school.repository.News;
-import com.mjc.school.repository.NewsParser;
+import com.mjc.school.repository.NewsRepository;
+import com.mjc.school.repository.implementation.NewsRepositoryImpl;
+import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
-import com.mjc.school.service.mapper.NewsMapperImpl;
 import com.mjc.school.service.mapper.NewsMapper;
+import com.mjc.school.service.mapper.NewsMapperImpl;
 import com.mjc.school.service.validator.InputValidator;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NewsService {
-		public static final String NEWS_TXT = "module-repository/src/main/resources/news.txt";
 		private final NewsMapper newsMapper = new NewsMapperImpl();
+		private  final NewsRepository newsRepository = new NewsRepositoryImpl();
+
 		public List<NewsDTO> getAllNews() {
-				List<News> newsList = NewsParser.parseNewsFromFile();
-				return newsList.stream().map(newsMapper::newsToNewsDTO).toList();
+				return newsRepository.readAll().stream().map(newsMapper::newsToNewsDTO).toList();
 		}
 		public NewsDTO getNewsById(Long id) throws NoSuchNewsException {
-				List<NewsDTO> newsList = getAllNews();
-				 if (!InputValidator.validateIfNewsWithIdExists(id, newsList)) {
+				 if (!InputValidator.validateIfNewsWithIdExists(id, getAllNews())) {
 						 throw new NoSuchNewsException("No news with such id!");
 				 }
-				return newsList.get((id.intValue() - 1));
+				return newsMapper.newsToNewsDTO(newsRepository.readById(id));
 		}
 		public NewsDTO addNewNews(NewsDTO newsDTO) throws InvalidNewsContentException {
 				if (!InputValidator.validateProperLengthOfString(newsDTO.getTitle(), 5, 30)) {
@@ -36,58 +32,25 @@ public class NewsService {
 				if (!InputValidator.validateProperLengthOfString(newsDTO.getContent(), 5, 255)) {
 						throw new InvalidNewsContentException("Content of message should be between 5 and 255 characters length!");
 				}
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT, true))) {
-						bw.append(NewsParser.newsToString(newsMapper.newsDTOToNews(newsDTO)));
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
-				return newsDTO;
+				News createdNews = newsRepository.create(newsMapper.newsDTOToNews(newsDTO));
+				return newsMapper.newsToNewsDTO(createdNews);
 		}
 
-		public NewsDTO updateNews (NewsDTO newsDTOToSave) throws InvalidNewsContentException {
-				List<NewsDTO> newsList = getAllNews();
-				NewsDTO oldNewsDTO = newsList.get(Math.toIntExact(newsDTOToSave.getId()) - 1);
-				if (!InputValidator.validateProperLengthOfString(newsDTOToSave.getTitle(), 5, 30)) {
+		public NewsDTO updateNews (NewsDTO updatedNewsDTO) throws InvalidNewsContentException {
+				if (!InputValidator.validateProperLengthOfString(updatedNewsDTO.getTitle(), 5, 30)) {
 						throw new InvalidNewsContentException("Title of message should be between 5 and 30 characters length!");
 				}
-				oldNewsDTO.setTitle(newsDTOToSave.getTitle());
-				if (!InputValidator.validateProperLengthOfString(newsDTOToSave.getContent(), 5, 255)) {
+				if (!InputValidator.validateProperLengthOfString(updatedNewsDTO.getContent(), 5, 255)) {
 						throw new InvalidNewsContentException("Content of message should be between 5 and 255 characters length!");
 				}
-				oldNewsDTO.setContent(newsDTOToSave.getContent());
-				oldNewsDTO.setLastUpdateDate(newsDTOToSave.getLastUpdateDate());
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
-						newsList.forEach(n -> {
-								try {
-										bw.write(NewsParser.newsToString(newsMapper.newsDTOToNews(n)) + "\n");
-								} catch (IOException e) {
-										e.printStackTrace();
-								}
-						});
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
-				return newsList.get(Math.toIntExact(oldNewsDTO.getId()) - 1);
+				News updatedNews = newsRepository.update(updatedNewsDTO.getId(), newsMapper.newsDTOToNews(updatedNewsDTO));
+				return newsMapper.newsToNewsDTO(updatedNews);
 		}
 
 		public boolean removeNewsById(Long newsId) throws NoSuchNewsException {
-				List<NewsDTO> list = getAllNews();
-				if (!InputValidator.validateIfNewsWithIdExists(newsId, list)) {
+				if (!InputValidator.validateIfNewsWithIdExists(newsId, getAllNews())) {
 						throw new NoSuchNewsException("No news with such id!");
 				}
-				List<NewsDTO> newsList = new ArrayList<>(list);
-				newsList.remove(Math.toIntExact(newsId) - 1);
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
-						newsList.forEach(n -> {
-								try {
-										bw.write(NewsParser.newsToString(newsMapper.newsDTOToNews(n)) + "\n");
-								} catch (IOException e) {
-										e.printStackTrace();
-								}
-						});
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
-				return true;
+				return newsRepository.deleteById(newsId);
 		}
 }

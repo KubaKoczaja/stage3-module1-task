@@ -1,4 +1,4 @@
-package com.mjc.school.repository.DTO;
+package com.mjc.school.repository.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

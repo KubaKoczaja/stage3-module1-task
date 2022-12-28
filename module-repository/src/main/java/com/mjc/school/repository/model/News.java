@@ -1,4 +1,4 @@
-package com.mjc.school.repository;
+package com.mjc.school.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

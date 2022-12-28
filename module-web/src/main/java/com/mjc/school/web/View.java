@@ -1,24 +1,23 @@
 package com.mjc.school.web;
 
-import com.mjc.school.repository.DTO.NewsDTO;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import com.mjc.school.repository.NewsParser;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 import java.util.Scanner;
 
 public class View {
 		private final Scanner scanner = new Scanner(System.in);
 		public int mainMenu() {
-				System.out.println("Enter the number of operation:\n" +
-								"1 - Get all news.\n" +
-								"2 - Get news by id.\n" +
-								"3 - Create news.\n" +
-								"4 - Update news.\n" +
-								"5 - Remove news by id.\n" +
-								"0 - Exit.");
+				System.out.println("""
+						Enter the number of operation:
+						1 - Get all news.
+						2 - Get news by id.
+						3 - Create news.
+						4 - Update news.
+						5 - Remove news by id.
+						0 - Exit.""");
 				return scanner.nextInt();
 		}
 		public void allNewsView(List<NewsDTO> newsDTOList) {

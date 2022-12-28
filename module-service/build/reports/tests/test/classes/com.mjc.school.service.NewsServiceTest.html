@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.257s</div>
+<div class="counter">0.309s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,47 +79,47 @@
 </thead>
 <tr>
 <td class="success">shouldReturnAListOfAllNews()</td>
-<td class="success">0.003s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldReturnAddedObjectIfValuesAreCorrect()</td>
-<td class="success">0.177s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldReturnNewsDTOObjectWithGivenId()</td>
-<td class="success">0.007s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldReturnTrueIfNewsWasSuccessfullyRemoved()</td>
-<td class="success">0.030s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldThrowExceptionIfValuesAreIncorrect()</td>
-<td class="success">0.002s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">shouldThrowExceptionWhenRemovingNonExistingNews()</td>
 <td class="success">0.004s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">shouldThrowExceptionWhenThereIsNoNewsWithSpecificId()</td>
+<td class="success">shouldReturnAddedObjectIfValuesAreCorrect()</td>
+<td class="success">0.202s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnNewsDTOObjectWithGivenId()</td>
+<td class="success">0.006s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnTrueIfNewsWasSuccessfullyRemoved()</td>
+<td class="success">0.042s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldThrowExceptionIfValuesAreIncorrect()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldThrowExceptionWhenRemovingNonExistingNews()</td>
 <td class="success">0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">shouldThrowExceptionWhenThereIsNoNewsWithSpecificId()</td>
+<td class="success">0.013s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">shouldThrowExceptionWhenUpdatedValuesAreIncorrect()</td>
-<td class="success">0.003s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect()</td>
-<td class="success">0.022s</td>
+<td class="success">0.023s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -133,7 +133,8 @@
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:155)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:82)
-	at com.mjc.school.service.NewsService.addNewNews(NewsService.java:38)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.create(NewsRepositoryImpl.java:17)
+	at com.mjc.school.service.NewsService.addNewNews(NewsService.java:36)
 	at com.mjc.school.service.NewsServiceTest.shouldReturnAddedObjectIfValuesAreCorrect(NewsServiceTest.java:55)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -224,8 +225,9 @@ java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (Sy
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:123)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
-	at com.mjc.school.service.NewsService.removeNewsById(NewsService.java:79)
-	at com.mjc.school.service.NewsServiceTest.shouldReturnTrueIfNewsWasSuccessfullyRemoved(NewsServiceTest.java:77)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.deleteById(NewsRepositoryImpl.java:61)
+	at com.mjc.school.service.NewsService.removeNewsById(NewsService.java:76)
+	at com.mjc.school.service.NewsServiceTest.shouldReturnTrueIfNewsWasSuccessfullyRemoved(NewsServiceTest.java:76)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -315,8 +317,9 @@ java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (Sy
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:123)
 	at java.base/java.io.FileWriter.&lt;init&gt;(FileWriter.java:66)
-	at com.mjc.school.service.NewsService.updateNews(NewsService.java:58)
-	at com.mjc.school.service.NewsServiceTest.shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect(NewsServiceTest.java:67)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.update(NewsRepositoryImpl.java:43)
+	at com.mjc.school.service.NewsService.updateNews(NewsService.java:65)
+	at com.mjc.school.service.NewsServiceTest.shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect(NewsServiceTest.java:66)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -411,7 +414,7 @@ java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (Sy
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.2</a> at 27 gru 2022, 12:41:10</p>
+<a href="http://www.gradle.org">Gradle 7.2</a> at 28 gru 2022, 17:58:41</p>
 </div>
 </div>
 </body>

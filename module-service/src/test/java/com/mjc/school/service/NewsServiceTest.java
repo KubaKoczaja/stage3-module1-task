@@ -1,8 +1,8 @@
 package com.mjc.school.service;
 
-import com.mjc.school.repository.DTO.NewsDTO;
-import com.mjc.school.repository.News;
 import com.mjc.school.repository.NewsParser;
+import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import lombok.SneakyThrows;

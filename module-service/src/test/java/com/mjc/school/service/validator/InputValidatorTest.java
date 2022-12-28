@@ -1,6 +1,6 @@
 package com.mjc.school.service.validator;
 
-import com.mjc.school.repository.DTO.NewsDTO;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

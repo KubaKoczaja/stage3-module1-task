@@ -1,12 +1,12 @@
 package com.mjc.school.service.mapper;
 
-import com.mjc.school.repository.DTO.NewsDTO;
-import com.mjc.school.repository.News;
+import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-25T18:01:16+0100",
+    date = "2022-12-28T16:30:30+0100",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.2.jar, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class NewsMapperImpl implements NewsMapper {

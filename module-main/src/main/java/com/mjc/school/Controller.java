@@ -1,6 +1,6 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.DTO.NewsDTO;
+import com.mjc.school.repository.model.dto.NewsDTO;
 import com.mjc.school.repository.NewsGenerator;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.exception.InvalidNewsContentException;

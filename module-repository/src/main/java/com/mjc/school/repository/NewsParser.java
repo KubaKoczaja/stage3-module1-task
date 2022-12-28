@@ -1,5 +1,7 @@
 package com.mjc.school.repository;
 
+import com.mjc.school.repository.model.News;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

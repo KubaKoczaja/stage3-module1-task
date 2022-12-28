@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mjc.school.service.NewsServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-12-27T11:41:09" hostname="DESKTOP-E33MI32" time="0.277">
+<testsuite name="com.mjc.school.service.NewsServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2022-12-28T16:58:41" hostname="DESKTOP-E33MI32" time="0.334">
   <properties/>
-  <testcase name="shouldReturnAddedObjectIfValuesAreCorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.177"/>
-  <testcase name="shouldReturnTrueIfNewsWasSuccessfullyRemoved()" classname="com.mjc.school.service.NewsServiceTest" time="0.03"/>
-  <testcase name="shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.022"/>
-  <testcase name="shouldReturnNewsDTOObjectWithGivenId()" classname="com.mjc.school.service.NewsServiceTest" time="0.007"/>
-  <testcase name="shouldThrowExceptionWhenThereIsNoNewsWithSpecificId()" classname="com.mjc.school.service.NewsServiceTest" time="0.009"/>
-  <testcase name="shouldThrowExceptionWhenRemovingNonExistingNews()" classname="com.mjc.school.service.NewsServiceTest" time="0.004"/>
-  <testcase name="shouldReturnAListOfAllNews()" classname="com.mjc.school.service.NewsServiceTest" time="0.003"/>
-  <testcase name="shouldThrowExceptionWhenUpdatedValuesAreIncorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.003"/>
-  <testcase name="shouldThrowExceptionIfValuesAreIncorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.002"/>
+  <testcase name="shouldReturnAddedObjectIfValuesAreCorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.202"/>
+  <testcase name="shouldReturnTrueIfNewsWasSuccessfullyRemoved()" classname="com.mjc.school.service.NewsServiceTest" time="0.042"/>
+  <testcase name="shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.023"/>
+  <testcase name="shouldReturnNewsDTOObjectWithGivenId()" classname="com.mjc.school.service.NewsServiceTest" time="0.006"/>
+  <testcase name="shouldThrowExceptionWhenThereIsNoNewsWithSpecificId()" classname="com.mjc.school.service.NewsServiceTest" time="0.013"/>
+  <testcase name="shouldThrowExceptionWhenRemovingNonExistingNews()" classname="com.mjc.school.service.NewsServiceTest" time="0.009"/>
+  <testcase name="shouldReturnAListOfAllNews()" classname="com.mjc.school.service.NewsServiceTest" time="0.004"/>
+  <testcase name="shouldThrowExceptionWhenUpdatedValuesAreIncorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.005"/>
+  <testcase name="shouldThrowExceptionIfValuesAreIncorrect()" classname="com.mjc.school.service.NewsServiceTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (System nie może odnaleźć określonej ścieżki)
 	at java.base/java.io.FileOutputStream.open0(Native Method)
@@ -17,7 +17,8 @@
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:155)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:82)
-	at com.mjc.school.service.NewsService.addNewNews(NewsService.java:38)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.create(NewsRepositoryImpl.java:17)
+	at com.mjc.school.service.NewsService.addNewNews(NewsService.java:36)
 	at com.mjc.school.service.NewsServiceTest.shouldReturnAddedObjectIfValuesAreCorrect(NewsServiceTest.java:55)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -108,8 +109,9 @@ java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (Sy
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:123)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
-	at com.mjc.school.service.NewsService.removeNewsById(NewsService.java:79)
-	at com.mjc.school.service.NewsServiceTest.shouldReturnTrueIfNewsWasSuccessfullyRemoved(NewsServiceTest.java:77)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.deleteById(NewsRepositoryImpl.java:61)
+	at com.mjc.school.service.NewsService.removeNewsById(NewsService.java:76)
+	at com.mjc.school.service.NewsServiceTest.shouldReturnTrueIfNewsWasSuccessfullyRemoved(NewsServiceTest.java:76)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -199,8 +201,9 @@ java.io.FileNotFoundException: module-repository\src\main\resources\news.txt (Sy
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:235)
 	at java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:123)
 	at java.base/java.io.FileWriter.<init>(FileWriter.java:66)
-	at com.mjc.school.service.NewsService.updateNews(NewsService.java:58)
-	at com.mjc.school.service.NewsServiceTest.shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect(NewsServiceTest.java:67)
+	at com.mjc.school.repository.implementation.NewsRepositoryImpl.update(NewsRepositoryImpl.java:43)
+	at com.mjc.school.service.NewsService.updateNews(NewsService.java:65)
+	at com.mjc.school.service.NewsServiceTest.shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect(NewsServiceTest.java:66)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
