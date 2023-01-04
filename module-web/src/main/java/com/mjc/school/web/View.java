@@ -1,6 +1,6 @@
 package com.mjc.school.web;
 
-import com.mjc.school.repository.model.dto.NewsDTO;
+import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.repository.DataSource;
 
 import java.time.LocalDateTime;
@@ -20,16 +20,16 @@ public class View {
 						0 - Exit.""");
 				return scanner.nextInt();
 		}
-		public void allNewsView(List<NewsDTO> newsDTOList) {
+		public void allNewsView(List<NewsModelDTO> newsModelDTOList) {
 				System.out.println("List of all news");
-				newsDTOList.forEach(System.out::println);
+				newsModelDTOList.forEach(System.out::println);
 		}
 
 		public Long newsByIdView() {
 				System.out.println("Please enter news id:");
 				return scanner.nextLong();
 		}
-		public NewsDTO createNewsView() {
+		public NewsModelDTO createNewsView() {
 				scanner.nextLine();
 				System.out.println("Please enter title:");
 				String title = scanner.nextLine();
@@ -37,14 +37,14 @@ public class View {
 				String content = scanner.nextLine();
 				System.out.println("Please enter Author Id:");
 				Long authorId = scanner.nextLong();
-				NewsDTO newsDTO = new NewsDTO();
-				newsDTO.setId((long) DataSource.parseNewsFromFile().size() + 1);
-				newsDTO.setTitle(title);
-				newsDTO.setContent(content);
-				newsDTO.setCreateDate(LocalDateTime.now());
-				newsDTO.setLastUpdateDate(LocalDateTime.now());
-				newsDTO.setAuthorId(authorId);
-				return newsDTO;
+				NewsModelDTO newsModelDTO = new NewsModelDTO();
+				newsModelDTO.setId((long) DataSource.parseNewsFromFile().size() + 1);
+				newsModelDTO.setTitle(title);
+				newsModelDTO.setContent(content);
+				newsModelDTO.setCreateDate(LocalDateTime.now());
+				newsModelDTO.setLastUpdateDate(LocalDateTime.now());
+				newsModelDTO.setAuthorId(authorId);
+				return newsModelDTO;
 		}
 		public Long enterNewsToUpdateView() {
 				System.out.println("Please enter news to update:");
@@ -57,7 +57,7 @@ public class View {
 				scanner.nextLine();
 				return scanner.nextLong();
 		}
-		public NewsDTO updateNewsView(NewsDTO newsToUpdate) {
+		public NewsModelDTO updateNewsView(NewsModelDTO newsToUpdate) {
 				scanner.nextLine();
 				System.out.println(newsToUpdate);
 				System.out.println("Please enter new title:");

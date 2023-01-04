@@ -1,6 +1,6 @@
 package com.mjc.school.repository;
 
-import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.NewsModel;
 
 import java.io.*;
 import java.time.Duration;
@@ -14,7 +14,7 @@ public class NewsGenerator {
 		private NewsGenerator() {		}
 
 		public static void generateNews() {
-				List<News> newsList = new ArrayList<>();
+				List<NewsModel> newsModelList = new ArrayList<>();
 				List<String> list = new ArrayList<>();
 
 				try (BufferedReader fileReader = new BufferedReader(new FileReader("module-repository/src/main/resources/content.txt"))){
@@ -25,18 +25,18 @@ public class NewsGenerator {
 				String[] titles = list.get(0).split(",");
 				String[] content = list.subList(1, list.size() - 1).toArray(new String[0]);
 				for (long i = 1L; i <= 20; i++) {
-						News news = new News();
-						news.setId(i);
-						news.setTitle(titles[ThreadLocalRandom.current().nextInt(0, titles.length)]);
-						news.setContent(content[ThreadLocalRandom.current().nextInt(0, content.length)]);
+						NewsModel newsModel = new NewsModel();
+						newsModel.setId(i);
+						newsModel.setTitle(titles[ThreadLocalRandom.current().nextInt(0, titles.length)]);
+						newsModel.setContent(content[ThreadLocalRandom.current().nextInt(0, content.length)]);
 						LocalDateTime randomDate = randomDate();
-						news.setCreateDate(randomDate);
-						news.setLastUpdateDate(randomDate);
-						news.setAuthorId(ThreadLocalRandom.current().nextLong(1, 7));
-						newsList.add(news);
+						newsModel.setCreateDate(randomDate);
+						newsModel.setLastUpdateDate(randomDate);
+						newsModel.setAuthorId(ThreadLocalRandom.current().nextLong(1, 7));
+						newsModelList.add(newsModel);
 				}
 				try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt"))){
-						newsList.forEach(s -> {
+						newsModelList.forEach(s -> {
 								try {
 										bufferedWriter.write(DataSource.newsToString(s) + "\n");
 								} catch (IOException e) {

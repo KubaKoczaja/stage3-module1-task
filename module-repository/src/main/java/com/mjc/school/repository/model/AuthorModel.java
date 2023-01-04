@@ -5,7 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class Author {
+public class AuthorModel {
 		private Long id;
 		private String name;
 }

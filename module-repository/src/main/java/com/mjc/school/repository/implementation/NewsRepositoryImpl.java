@@ -2,73 +2,45 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.DataSource;
 import com.mjc.school.repository.NewsRepository;
-import com.mjc.school.repository.model.News;
+import com.mjc.school.repository.model.NewsModel;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewsRepositoryImpl implements NewsRepository {
-		public static final String NEWS_TXT = "module-repository/src/main/resources/news.txt";
 		@Override
-		public News create(News news) {
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT, true))) {
-						bw.append(DataSource.newsToString(news));
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
-				return news;
+		public NewsModel create(NewsModel newsModel) {
+				DataSource.appendNewsToFile(newsModel);
+				return newsModel;
 		}
 
 		@Override
-		public List<News> readAll() {
+		public List<NewsModel> readAll() {
 				return DataSource.parseNewsFromFile();
 		}
 
 		@Override
-		public News readById(Long id) {
-				List<News> newsList = DataSource.parseNewsFromFile();
-				return newsList.get(Math.toIntExact(id - 1));
+		public NewsModel readById(Long id) {
+				List<NewsModel> newsModelList = DataSource.parseNewsFromFile();
+				return newsModelList.get(Math.toIntExact(id - 1));
 		}
 
 		@Override
-		public News update(Long id, News updatedNews) {
-				List<News> newsList = DataSource.parseNewsFromFile();
-				News newsToUpdate = newsList.get(Math.toIntExact(id - 1));
-				newsToUpdate.setTitle(updatedNews.getTitle());
-				newsToUpdate.setContent(updatedNews.getContent());
-				newsToUpdate.setLastUpdateDate(updatedNews.getLastUpdateDate());
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
-						newsList.forEach(n -> {
-								try {
-										bw.write(DataSource.newsToString(n) + "\n");
-								} catch (IOException e) {
-										e.printStackTrace();
-								}
-						});
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
-				return updatedNews;
+		public NewsModel update(Long id, NewsModel updatedNewsModel) {
+				List<NewsModel> newsModelList = DataSource.parseNewsFromFile();
+				NewsModel newsModelToUpdate = newsModelList.get(Math.toIntExact(id - 1));
+				newsModelToUpdate.setTitle(updatedNewsModel.getTitle());
+				newsModelToUpdate.setContent(updatedNewsModel.getContent());
+				newsModelToUpdate.setLastUpdateDate(updatedNewsModel.getLastUpdateDate());
+				DataSource.saveAllToFile(newsModelList);
+				return updatedNewsModel;
 		}
 
 		@Override
 		public Boolean deleteById(Long id) {
-				List<News> newsList = new ArrayList<>(DataSource.parseNewsFromFile());
-				newsList.remove(Math.toIntExact(id - 1));
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
-						newsList.forEach(n -> {
-								try {
-										bw.write(DataSource.newsToString(n) + "\n");
-								} catch (IOException e) {
-										e.printStackTrace();
-								}
-						});
-				} catch (IOException e) {
-						e.printStackTrace();
-				}
+				List<NewsModel> newsModelList = new ArrayList<>(DataSource.parseNewsFromFile());
+				newsModelList.remove(Math.toIntExact(id - 1));
+				DataSource.saveAllToFile(newsModelList);
 				return Boolean.TRUE;
 		}
 }

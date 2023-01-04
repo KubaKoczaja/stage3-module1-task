@@ -1,4 +1,4 @@
-package com.mjc.school.repository.model;
+package com.mjc.school.repository.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @ToString
-public class News {
+public class NewsModelDTO {
 		private Long id;
 		private String title;
 		private String content;

@@ -1,49 +1,49 @@
 package com.mjc.school.service.mapper;
 
-import com.mjc.school.repository.model.News;
-import com.mjc.school.repository.model.dto.NewsDTO;
+import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.repository.model.dto.NewsModelDTO;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-12-28T16:30:30+0100",
+    date = "2023-01-04T17:33:37+0100",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.2.jar, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class NewsMapperImpl implements NewsMapper {
 
     @Override
-    public NewsDTO newsToNewsDTO(News news) {
-        if ( news == null ) {
+    public NewsModelDTO newsToNewsDTO(NewsModel newsModel) {
+        if ( newsModel == null ) {
             return null;
         }
 
-        NewsDTO newsDTO = new NewsDTO();
+        NewsModelDTO newsModelDTO = new NewsModelDTO();
 
-        newsDTO.setId( news.getId() );
-        newsDTO.setTitle( news.getTitle() );
-        newsDTO.setContent( news.getContent() );
-        newsDTO.setCreateDate( news.getCreateDate() );
-        newsDTO.setLastUpdateDate( news.getLastUpdateDate() );
-        newsDTO.setAuthorId( news.getAuthorId() );
+        newsModelDTO.setId( newsModel.getId() );
+        newsModelDTO.setTitle( newsModel.getTitle() );
+        newsModelDTO.setContent( newsModel.getContent() );
+        newsModelDTO.setCreateDate( newsModel.getCreateDate() );
+        newsModelDTO.setLastUpdateDate( newsModel.getLastUpdateDate() );
+        newsModelDTO.setAuthorId( newsModel.getAuthorId() );
 
-        return newsDTO;
+        return newsModelDTO;
     }
 
     @Override
-    public News newsDTOToNews(NewsDTO newsDTO) {
-        if ( newsDTO == null ) {
+    public NewsModel newsDTOToNews(NewsModelDTO newsModelDTO) {
+        if ( newsModelDTO == null ) {
             return null;
         }
 
-        News news = new News();
+        NewsModel newsModel = new NewsModel();
 
-        news.setId( newsDTO.getId() );
-        news.setTitle( newsDTO.getTitle() );
-        news.setContent( newsDTO.getContent() );
-        news.setCreateDate( newsDTO.getCreateDate() );
-        news.setLastUpdateDate( newsDTO.getLastUpdateDate() );
-        news.setAuthorId( newsDTO.getAuthorId() );
+        newsModel.setId( newsModelDTO.getId() );
+        newsModel.setTitle( newsModelDTO.getTitle() );
+        newsModel.setContent( newsModelDTO.getContent() );
+        newsModel.setCreateDate( newsModelDTO.getCreateDate() );
+        newsModel.setLastUpdateDate( newsModelDTO.getLastUpdateDate() );
+        newsModel.setAuthorId( newsModelDTO.getAuthorId() );
 
-        return news;
+        return newsModel;
     }
 }

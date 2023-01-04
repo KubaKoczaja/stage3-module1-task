@@ -1,6 +1,6 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.model.dto.NewsDTO;
+import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.repository.NewsGenerator;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.exception.InvalidNewsContentException;
@@ -33,7 +33,7 @@ public class Controller {
 			}
 
 			public void handleAllNewsRequest() {
-					List<NewsDTO> newsList = newsService.getAllNews();
+					List<NewsModelDTO> newsList = newsService.getAllNews();
 					view.allNewsView(newsList);
 			}
 
@@ -47,25 +47,25 @@ public class Controller {
 			}
 
 			public void handleCreateNewsRequest() {
-					NewsDTO newsDTOInput = view.createNewsView();
+					NewsModelDTO newsModelDTOInput = view.createNewsView();
 					try {
-							newsService.addNewNews(newsDTOInput);
+							newsService.addNewNews(newsModelDTOInput);
 					} catch (InvalidNewsContentException e) {
 							System.out.println(e.getMessage());
 							start();
 					}
 			}
 			public void handleUpdateNewsRequest() {
-					NewsDTO newsDTOToUpdate = null;
+					NewsModelDTO newsModelDTOToUpdate = null;
 					try {
-							newsDTOToUpdate = newsService.getNewsById(view.enterNewsToUpdateView());
+							newsModelDTOToUpdate = newsService.getNewsById(view.enterNewsToUpdateView());
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();
 					}
-					NewsDTO updatedNewsDTO = view.updateNewsView(newsDTOToUpdate);
+					NewsModelDTO updatedNewsModelDTO = view.updateNewsView(newsModelDTOToUpdate);
 					try {
-							newsService.updateNews(updatedNewsDTO);
+							newsService.updateNews(updatedNewsModelDTO);
 					} catch (InvalidNewsContentException e) {
 							System.out.println(e.getMessage());
 							start();

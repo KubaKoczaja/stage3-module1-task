@@ -1,8 +1,8 @@
 package com.mjc.school.service;
 
 import com.mjc.school.repository.DataSource;
-import com.mjc.school.repository.model.News;
-import com.mjc.school.repository.model.dto.NewsDTO;
+import com.mjc.school.repository.model.NewsModel;
+import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import lombok.SneakyThrows;
@@ -17,20 +17,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NewsServiceTest {
+class NewsModelServiceTest {
 		private final NewsService newsService = new NewsService();
 		private final LocalDateTime testDateTime = LocalDateTime.now();
-		private final List<News> testList = List.of(new News(1L, "test", "test", testDateTime, testDateTime, 1L),
-						new News(2L, "test", "test", testDateTime, testDateTime, 1L));
-		private final MockedStatic<DataSource> newsParserMockedStatic = Mockito.mockStatic(DataSource.class);
+		private final List<NewsModel> testList = List.of(new NewsModel(1L, "test", "test", testDateTime, testDateTime, 1L),
+						new NewsModel(2L, "test", "test", testDateTime, testDateTime, 1L));
+		private final MockedStatic<DataSource> dataSourceMockedStatic = Mockito.mockStatic(DataSource.class);
 
 		@BeforeEach
 		void setUp() {
-				newsParserMockedStatic.when(DataSource::parseNewsFromFile).thenReturn(testList);
+				dataSourceMockedStatic.when(DataSource::parseNewsFromFile).thenReturn(testList);
 		}
 		@AfterEach
 		void tearDown() {
-				newsParserMockedStatic.close();
+				dataSourceMockedStatic.close();
 		}
 		@Test
 		void shouldReturnAListOfAllNews() {
@@ -40,7 +40,7 @@ class NewsServiceTest {
 		@SneakyThrows
 		@Test
 		void shouldReturnNewsDTOObjectWithGivenId() {
-				NewsDTO expected = new NewsDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
+				NewsModelDTO expected = new NewsModelDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
 				assertEquals(expected, newsService.getNewsById(1L));
 		}
 		@SneakyThrows
@@ -51,23 +51,23 @@ class NewsServiceTest {
 		@SneakyThrows
 		@Test
 		void shouldReturnAddedObjectIfValuesAreCorrect() {
-				NewsDTO expected = new NewsDTO(1L, "testTitle", "testContent", testDateTime, testDateTime, 1L);
+				NewsModelDTO expected = new NewsModelDTO(1L, "testTitle", "testContent", testDateTime, testDateTime, 1L);
 				assertEquals(expected, newsService.addNewNews(expected));
 		}
 		@Test
 		void shouldThrowExceptionIfValuesAreIncorrect() {
-				NewsDTO expected = new NewsDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
+				NewsModelDTO expected = new NewsModelDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
 				assertThrows(InvalidNewsContentException.class, () -> newsService.addNewNews(expected));
 		}
 		@SneakyThrows
 		@Test
 		void shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect() {
-				NewsDTO expected = new NewsDTO(1L, "new_title", "new_content", testDateTime, testDateTime, 1L);
+				NewsModelDTO expected = new NewsModelDTO(1L, "new_title", "new_content", testDateTime, testDateTime, 1L);
 				assertEquals(expected, newsService.updateNews(expected));
 		}
 		@Test
 		void shouldThrowExceptionWhenUpdatedValuesAreIncorrect() {
-				NewsDTO expected = new NewsDTO(1L, "new", "new_content", testDateTime, testDateTime, 1L);
+				NewsModelDTO expected = new NewsModelDTO(1L, "new", "new_content", testDateTime, testDateTime, 1L);
 				assertThrows(InvalidNewsContentException.class, () -> newsService.updateNews(expected));
 		}
 		@SneakyThrows
