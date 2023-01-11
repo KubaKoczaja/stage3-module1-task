@@ -8,6 +8,6 @@ public interface NewsRepository {
 		NewsModel create(NewsModel newsModel);
 		List<NewsModel> readAll();
 		NewsModel readById(Long id);
-		NewsModel update(Long id, NewsModel updatedNewsModel);
+		NewsModel update(NewsModel updatedNewsModel);
 		Boolean deleteById(Long id);
 }

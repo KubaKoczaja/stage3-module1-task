@@ -1,6 +1,7 @@
 package com.mjc.school.repository;
 
 import com.mjc.school.repository.model.NewsModel;
+import lombok.AllArgsConstructor;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -8,28 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class DataSource {
-		public static final String NEWS_TXT = "module-repository/src/main/resources/news.txt";
-		private DataSource(){}
 
-		public static List<NewsModel> parseNewsFromFile() {
+@AllArgsConstructor
+public class DataSource {
+		private String filePath;
+
+		public List<NewsModel> parseNewsFromFile() {
 				List<NewsModel> list = new ArrayList<>();
-				try (BufferedReader fileReader = new BufferedReader(new FileReader(NEWS_TXT))){
-						list = fileReader.lines().map(DataSource::stringToNews).toList();
+				try (BufferedReader fileReader = new BufferedReader(new FileReader(filePath))){
+						list = fileReader.lines().map(this::stringToNews).toList();
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
 				return list;
 		}
-		public static void appendNewsToFile(NewsModel newsModel) {
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT, true))) {
+		public void appendNewsToFile(NewsModel newsModel) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
 						bw.append(newsToString(newsModel));
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
 		}
-		public static void saveAllToFile(List<NewsModel> newsModelList) {
-				try (BufferedWriter bw = new BufferedWriter(new FileWriter(NEWS_TXT))) {
+		public void saveAllToFile(List<NewsModel> newsModelList) {
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
 						newsModelList.forEach(n -> {
 								try {
 										bw.write(newsToString(n) + "\n");
@@ -42,12 +44,12 @@ public class DataSource {
 				}
 		}
 
-		public static NewsModel stringToNews(String s) {
+		public NewsModel stringToNews(String s) {
 				String[] stringArr = s.split("<>");
 				return new NewsModel(Long.parseLong(stringArr[0]),stringArr[1],stringArr[2], LocalDateTime.parse(stringArr[3]),LocalDateTime.parse(stringArr[4]),Long.parseLong(stringArr[5]));
 		}
 
-		public static String newsToString(NewsModel newsModel) {
+		public String newsToString(NewsModel newsModel) {
 				StringJoiner sj = new StringJoiner("<>");
 				return sj.add(newsModel.getId().toString())
 								.add(newsModel.getTitle())

@@ -1,19 +1,22 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.repository.NewsGenerator;
+import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.service.NewsService;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.web.View;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
 public class Controller {
 		private final View view = new View();
 		private final NewsService newsService = new NewsService();
+		private final NewsGenerator newsGenerator = new NewsGenerator();
 			public void start() {
-					NewsGenerator.generateNews();
+					newsGenerator.generateNews();
 					int menuOption;
 					do {
 							menuOption = view.mainMenu();

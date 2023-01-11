@@ -1,5 +1,6 @@
 package com.mjc.school.web;
 
+import com.mjc.school.repository.FilePathUtils;
 import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.repository.DataSource;
 
@@ -9,6 +10,7 @@ import java.util.Scanner;
 
 public class View {
 		private final Scanner scanner = new Scanner(System.in);
+		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
 		public int mainMenu() {
 				System.out.println("""
 						Enter the number of operation:
@@ -38,7 +40,7 @@ public class View {
 				System.out.println("Please enter Author Id:");
 				Long authorId = scanner.nextLong();
 				NewsModelDTO newsModelDTO = new NewsModelDTO();
-				newsModelDTO.setId((long) DataSource.parseNewsFromFile().size() + 1);
+				newsModelDTO.setId((long) dataSource.parseNewsFromFile().size() + 1);
 				newsModelDTO.setTitle(title);
 				newsModelDTO.setContent(content);
 				newsModelDTO.setCreateDate(LocalDateTime.now());

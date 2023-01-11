@@ -1,6 +1,7 @@
 package com.mjc.school.repository;
 
 import com.mjc.school.repository.model.NewsModel;
+import lombok.NoArgsConstructor;
 
 import java.io.*;
 import java.time.Duration;
@@ -10,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+@NoArgsConstructor
 public class NewsGenerator {
-		private NewsGenerator() {		}
+		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
 
-		public static void generateNews() {
+		public void generateNews() {
 				List<NewsModel> newsModelList = new ArrayList<>();
 				List<String> list = new ArrayList<>();
 
@@ -38,7 +40,7 @@ public class NewsGenerator {
 				try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("module-repository/src/main/resources/news.txt"))){
 						newsModelList.forEach(s -> {
 								try {
-										bufferedWriter.write(DataSource.newsToString(s) + "\n");
+										bufferedWriter.write(dataSource.newsToString(s) + "\n");
 								} catch (IOException e) {
 										e.printStackTrace();
 								}
@@ -47,7 +49,7 @@ public class NewsGenerator {
 						e.printStackTrace();
 				}
 		}
-		public static LocalDateTime randomDate() {
+		public LocalDateTime randomDate() {
 				long startMillis = LocalDateTime.now().minus(Duration.ofDays(10)).toEpochSecond(ZoneOffset.ofHours(0));
 				long endMillis = LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(0));
 				long randomMillisSinceEpoch = ThreadLocalRandom.current().nextLong(startMillis, endMillis);

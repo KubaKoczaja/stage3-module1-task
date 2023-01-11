@@ -43,7 +43,7 @@ public class NewsService {
 				if (!InputValidator.validateProperLengthOfString(updatedNewsModelDTO.getContent(), 5, 255)) {
 						throw new InvalidNewsContentException("Content of message should be between 5 and 255 characters length!");
 				}
-				NewsModel updatedNewsModel = newsRepository.update(updatedNewsModelDTO.getId(), newsMapper.newsDTOToNews(updatedNewsModelDTO));
+				NewsModel updatedNewsModel = newsRepository.update(newsMapper.newsDTOToNews(updatedNewsModelDTO));
 				return newsMapper.newsToNewsDTO(updatedNewsModel);
 		}
 

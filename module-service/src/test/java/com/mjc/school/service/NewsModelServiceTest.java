@@ -1,41 +1,41 @@
 package com.mjc.school.service;
 
-import com.mjc.school.repository.DataSource;
-import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.Month;
 
+import static com.mjc.school.repository.FilePathUtils.NEWS_TXT;
+import static com.mjc.school.repository.FilePathUtils.TEST_TXT;
 import static org.junit.jupiter.api.Assertions.*;
-
 class NewsModelServiceTest {
 		private final NewsService newsService = new NewsService();
-		private final LocalDateTime testDateTime = LocalDateTime.now();
-		private final List<NewsModel> testList = List.of(new NewsModel(1L, "test", "test", testDateTime, testDateTime, 1L),
-						new NewsModel(2L, "test", "test", testDateTime, testDateTime, 1L));
-		private final MockedStatic<DataSource> dataSourceMockedStatic = Mockito.mockStatic(DataSource.class);
-
+		private final LocalDateTime testDateTime = LocalDateTime.of(2023, Month.JANUARY,10,12,15,10,0);
 		@BeforeEach
 		void setUp() {
-				dataSourceMockedStatic.when(DataSource::parseNewsFromFile).thenReturn(testList);
+				try {
+						Path news = Path.of(NEWS_TXT);
+						Files.deleteIfExists(news);
+						Files.copy(Path.of(TEST_TXT), news);
+				} catch (IOException e) {
+						throw new RuntimeException(e);
+				}
 		}
-		@AfterEach
-		void tearDown() {
-				dataSourceMockedStatic.close();
-		}
+		
+
 		@Test
 		void shouldReturnAListOfAllNews() {
 				int lengthExpected = 2;
-				assertEquals(lengthExpected, newsService.getAllNews().size());
+				int lengthActual = newsService.getAllNews().size();
+				assertEquals(lengthExpected, lengthActual);
 		}
 		@SneakyThrows
 		@Test
@@ -61,7 +61,7 @@ class NewsModelServiceTest {
 		}
 		@SneakyThrows
 		@Test
-		void shouldUpdateNewsWithGivenIdWhenValuesOfTiteAndContentAreCorrect() {
+		void shouldUpdateNewsWithGivenIdWhenValuesOfTitleAndContentAreCorrect() {
 				NewsModelDTO expected = new NewsModelDTO(1L, "new_title", "new_content", testDateTime, testDateTime, 1L);
 				assertEquals(expected, newsService.updateNews(expected));
 		}
