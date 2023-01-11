@@ -11,7 +11,7 @@ import java.util.List;
 
 @NoArgsConstructor
 public class NewsRepositoryImpl implements NewsRepository {
-		private DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
+		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
 		@Override
 		public NewsModel create(NewsModel newsModel) {
 				dataSource.appendNewsToFile(newsModel);
