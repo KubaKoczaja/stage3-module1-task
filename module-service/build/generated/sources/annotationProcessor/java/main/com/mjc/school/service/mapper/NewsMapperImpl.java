@@ -1,36 +1,36 @@
 package com.mjc.school.service.mapper;
 
 import com.mjc.school.repository.model.NewsModel;
-import com.mjc.school.repository.model.dto.NewsModelDTO;
+import com.mjc.school.repository.model.dto.NewsModelDto;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-01-10T11:17:08+0100",
+    date = "2023-01-12T11:22:20+0100",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.2.jar, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class NewsMapperImpl implements NewsMapper {
 
     @Override
-    public NewsModelDTO newsToNewsDTO(NewsModel newsModel) {
+    public NewsModelDto newsToNewsDTO(NewsModel newsModel) {
         if ( newsModel == null ) {
             return null;
         }
 
-        NewsModelDTO newsModelDTO = new NewsModelDTO();
+        NewsModelDto newsModelDto = new NewsModelDto();
 
-        newsModelDTO.setId( newsModel.getId() );
-        newsModelDTO.setTitle( newsModel.getTitle() );
-        newsModelDTO.setContent( newsModel.getContent() );
-        newsModelDTO.setCreateDate( newsModel.getCreateDate() );
-        newsModelDTO.setLastUpdateDate( newsModel.getLastUpdateDate() );
-        newsModelDTO.setAuthorId( newsModel.getAuthorId() );
+        newsModelDto.setId( newsModel.getId() );
+        newsModelDto.setTitle( newsModel.getTitle() );
+        newsModelDto.setContent( newsModel.getContent() );
+        newsModelDto.setCreateDate( newsModel.getCreateDate() );
+        newsModelDto.setLastUpdateDate( newsModel.getLastUpdateDate() );
+        newsModelDto.setAuthorId( newsModel.getAuthorId() );
 
-        return newsModelDTO;
+        return newsModelDto;
     }
 
     @Override
-    public NewsModel newsDTOToNews(NewsModelDTO newsModelDTO) {
+    public NewsModel newsDTOToNews(NewsModelDto newsModelDTO) {
         if ( newsModelDTO == null ) {
             return null;
         }

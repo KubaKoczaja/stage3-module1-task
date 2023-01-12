@@ -1,8 +1,8 @@
 package com.mjc.school;
 
 import com.mjc.school.repository.NewsGenerator;
-import com.mjc.school.repository.model.dto.NewsModelDTO;
-import com.mjc.school.service.implementation.NewsServiceImpl;
+import com.mjc.school.repository.model.dto.NewsModelDto;
+import com.mjc.school.service.implementation.NewsModelServiceImpl;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.web.View;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Controller {
 		private final View view = new View();
-		private final NewsServiceImpl newsService = new NewsServiceImpl();
+		private final NewsModelServiceImpl newsService = new NewsModelServiceImpl();
 		private final NewsGenerator newsGenerator = new NewsGenerator();
 			public void start() {
 					newsGenerator.generateNews();
@@ -36,13 +36,13 @@ public class Controller {
 			}
 
 			public void handleAllNewsRequest() {
-					List<NewsModelDTO> newsList = newsService.readAllNews();
+					List<NewsModelDto> newsList = newsService.readAllNews();
 					view.allNewsView(newsList);
 			}
 
 			public void handleNewsById() {
 					try {
-							System.out.println(newsService.readNewsById(view.newsByIdView()));
+							System.out.println(newsService.readById(view.newsByIdView()));
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();
@@ -50,25 +50,25 @@ public class Controller {
 			}
 
 			public void handleCreateNewsRequest() {
-					NewsModelDTO newsModelDTOInput = view.createNewsView();
+					NewsModelDto newsModelDtoInput = view.createNewsView();
 					try {
-							newsService.createNewNews(newsModelDTOInput);
+							newsService.createNewNews(newsModelDtoInput);
 					} catch (InvalidNewsContentException e) {
 							System.out.println(e.getMessage());
 							start();
 					}
 			}
 			public void handleUpdateNewsRequest() {
-					NewsModelDTO newsModelDTOToUpdate = null;
+					NewsModelDto newsModelDtoToUpdate = null;
 					try {
-							newsModelDTOToUpdate = newsService.readNewsById(view.enterNewsToUpdateView());
+							newsModelDtoToUpdate = newsService.readById(view.enterNewsToUpdateView());
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();
 					}
-					NewsModelDTO updatedNewsModelDTO = view.updateNewsView(newsModelDTOToUpdate);
+					NewsModelDto updatedNewsModelDto = view.updateNewsView(newsModelDtoToUpdate);
 					try {
-							newsService.updateNews(updatedNewsModelDTO);
+							newsService.updateNews(updatedNewsModelDto);
 					} catch (InvalidNewsContentException e) {
 							System.out.println(e.getMessage());
 							start();

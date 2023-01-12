@@ -4,7 +4,7 @@ import com.mjc.school.repository.model.NewsModel;
 
 import java.util.List;
 
-public interface NewsRepository {
+public interface NewsModelRepository {
 		NewsModel create(NewsModel newsModel);
 		List<NewsModel> readAll();
 		NewsModel readById(Long id);

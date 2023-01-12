@@ -1,21 +1,20 @@
-1<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-08T14:00:28<>2023-01-08T14:00:28<>5
-2<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-09T11:24:02<>2023-01-09T11:24:02<>1
-3<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T14:04:49<>2023-01-05T14:04:49<>1
-4<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T07:34:51<>2023-01-05T07:34:51<>3
-5<>HOUSING<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-05T06:17:59<>2023-01-05T06:17:59<>6
-6<>HOUSING<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-05T16:06:54<>2023-01-05T16:06:54<>3
-7<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-05T07:54:01<>2023-01-05T07:54:01<>3
-8<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-11T09:36:09<>2023-01-11T09:36:09<>2
-9<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-10T19:38:51<>2023-01-10T19:38:51<>1
-10<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-07T14:40:55<>2023-01-07T14:40:55<>6
-11<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-12T00:39:13<>2023-01-12T00:39:13<>2
-12<>CONSTRUCTIONS<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-10T03:17:12<>2023-01-10T03:17:12<>6
-13<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-12T02:02:56<>2023-01-12T02:02:56<>5
-14<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-07T10:19:36<>2023-01-07T10:19:36<>5
-15<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T03:19:30<>2023-01-05T03:19:30<>1
-16<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-11T23:42:23<>2023-01-11T23:42:23<>2
-17<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-08T21:20:38<>2023-01-08T21:20:38<>2
-18<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-02T18:15:11<>2023-01-02T18:15:11<>6
-19<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-07T23:44:46<>2023-01-07T23:44:46<>3
-20<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-06T04:11:11<>2023-01-06T04:11:11<>4
-21<>kkkkkkkkkkkkk<>iiiiiiiiiiiiiiiiiiii<>2023-01-12T11:11:27.157625500<>2023-01-12T11:11:27.157625500<>9
+1<>CONSTRUCTIONS<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-04T02:08:18<>2023-01-04T02:08:18<>2
+2<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-11T21:40<>2023-01-11T21:40<>4
+3<>RANDOM GIBBERISH<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-03T18:00:37<>2023-01-03T18:00:37<>6
+4<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-03T03:58:56<>2023-01-03T03:58:56<>3
+5<>HOUSING<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-08T12:01:02<>2023-01-08T12:01:02<>1
+6<>HOUSING<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-06T09:07:22<>2023-01-06T09:07:22<>2
+7<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-03T14:21:55<>2023-01-03T14:21:55<>6
+8<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-08T02:53:34<>2023-01-08T02:53:34<>1
+9<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-09T16:41:21<>2023-01-09T16:41:21<>4
+10<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-06T16:14:38<>2023-01-06T16:14:38<>5
+11<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T21:21:31<>2023-01-05T21:21:31<>3
+12<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-04T14:46:10<>2023-01-04T14:46:10<>3
+13<>RANDOM GIBBERISH<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T00:22:55<>2023-01-05T00:22:55<>1
+14<>CONSTRUCTIONS<>Mauris mollis, nisl at rhoncus sodales, turpis.<>2023-01-09T12:17:50<>2023-01-09T12:17:50<>5
+15<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-10T23:44:31<>2023-01-10T23:44:31<>6
+16<>HOUSING<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T18:21:05<>2023-01-05T18:21:05<>4
+17<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-05T09:51:17<>2023-01-05T09:51:17<>4
+18<>CONSTRUCTIONS<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-09T05:16:38<>2023-01-09T05:16:38<>2
+19<>RANDOM GIBBERISH<>Nam vitae egestas velit. Quisque consectetur lacus.<>2023-01-09T10:44:29<>2023-01-09T10:44:29<>6
+20<>CONSTRUCTIONS<>Sed sagittis erat at urna suscipit pulvinar.<>2023-01-05T02:59:34<>2023-01-05T02:59:34<>5

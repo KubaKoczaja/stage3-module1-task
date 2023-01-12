@@ -1,7 +1,7 @@
 package com.mjc.school.web;
 
 import com.mjc.school.repository.FilePathUtils;
-import com.mjc.school.repository.model.dto.NewsModelDTO;
+import com.mjc.school.repository.model.dto.NewsModelDto;
 import com.mjc.school.repository.DataSource;
 
 import java.time.LocalDateTime;
@@ -22,16 +22,16 @@ public class View {
 						0 - Exit.""");
 				return scanner.nextInt();
 		}
-		public void allNewsView(List<NewsModelDTO> newsModelDTOList) {
+		public void allNewsView(List<NewsModelDto> newsModelDtoList) {
 				System.out.println("List of all news");
-				newsModelDTOList.forEach(System.out::println);
+				newsModelDtoList.forEach(System.out::println);
 		}
 
 		public Long newsByIdView() {
 				System.out.println("Please enter news id:");
 				return scanner.nextLong();
 		}
-		public NewsModelDTO createNewsView() {
+		public NewsModelDto createNewsView() {
 				scanner.nextLine();
 				System.out.println("Please enter title:");
 				String title = scanner.nextLine();
@@ -39,7 +39,7 @@ public class View {
 				String content = scanner.nextLine();
 				System.out.println("Please enter Author Id:");
 				Long authorId = scanner.nextLong();
-				NewsModelDTO newsModelDTO = new NewsModelDTO();
+				NewsModelDto newsModelDTO = new NewsModelDto();
 				newsModelDTO.setId((long) dataSource.parseNewsFromFile().size() + 1);
 				newsModelDTO.setTitle(title);
 				newsModelDTO.setContent(content);
@@ -59,7 +59,7 @@ public class View {
 				scanner.nextLine();
 				return scanner.nextLong();
 		}
-		public NewsModelDTO updateNewsView(NewsModelDTO newsToUpdate) {
+		public NewsModelDto updateNewsView(NewsModelDto newsToUpdate) {
 				scanner.nextLine();
 				System.out.println(newsToUpdate);
 				System.out.println("Please enter new title:");

@@ -2,7 +2,7 @@ package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.DataSource;
 import com.mjc.school.repository.FilePathUtils;
-import com.mjc.school.repository.NewsRepository;
+import com.mjc.school.repository.NewsModelRepository;
 import com.mjc.school.repository.model.NewsModel;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-public class NewsRepositoryImpl implements NewsRepository {
+public class NewsModelRepositoryImpl implements NewsModelRepository {
 		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
 		@Override
 		public NewsModel create(NewsModel newsModel) {

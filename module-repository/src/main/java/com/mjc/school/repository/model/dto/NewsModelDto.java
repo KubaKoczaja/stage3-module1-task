@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @ToString
-public class NewsModelDTO {
+public class NewsModelDto {
 		private Long id;
 		private String title;
 		private String content;

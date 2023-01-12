@@ -1,6 +1,6 @@
 package com.mjc.school.service.validator;
 
-import com.mjc.school.repository.model.dto.NewsModelDTO;
+import com.mjc.school.repository.model.dto.NewsModelDto;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidatorTest {
 		private final InputValidator inputValidator = new InputValidator();
-		private final List<NewsModelDTO> testList = List.of(new NewsModelDTO(1L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L),
-						new NewsModelDTO(2L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L));
+		private final List<NewsModelDto> testList = List.of(new NewsModelDto(1L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L),
+						new NewsModelDto(2L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L));
 		private final int min = 5;
 		private final int max = 10;
 		private Long newsId;
