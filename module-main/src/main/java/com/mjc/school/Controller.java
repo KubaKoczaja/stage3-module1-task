@@ -2,7 +2,7 @@ package com.mjc.school;
 
 import com.mjc.school.repository.NewsGenerator;
 import com.mjc.school.repository.model.dto.NewsModelDTO;
-import com.mjc.school.service.NewsService;
+import com.mjc.school.service.implementation.NewsServiceImpl;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.web.View;
@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Controller {
 		private final View view = new View();
-		private final NewsService newsService = new NewsService();
+		private final NewsServiceImpl newsService = new NewsServiceImpl();
 		private final NewsGenerator newsGenerator = new NewsGenerator();
 			public void start() {
 					newsGenerator.generateNews();
@@ -36,13 +36,13 @@ public class Controller {
 			}
 
 			public void handleAllNewsRequest() {
-					List<NewsModelDTO> newsList = newsService.getAllNews();
+					List<NewsModelDTO> newsList = newsService.readAllNews();
 					view.allNewsView(newsList);
 			}
 
 			public void handleNewsById() {
 					try {
-							System.out.println(newsService.getNewsById(view.newsByIdView()));
+							System.out.println(newsService.readNewsById(view.newsByIdView()));
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();
@@ -52,7 +52,7 @@ public class Controller {
 			public void handleCreateNewsRequest() {
 					NewsModelDTO newsModelDTOInput = view.createNewsView();
 					try {
-							newsService.addNewNews(newsModelDTOInput);
+							newsService.createNewNews(newsModelDTOInput);
 					} catch (InvalidNewsContentException e) {
 							System.out.println(e.getMessage());
 							start();
@@ -61,7 +61,7 @@ public class Controller {
 			public void handleUpdateNewsRequest() {
 					NewsModelDTO newsModelDTOToUpdate = null;
 					try {
-							newsModelDTOToUpdate = newsService.getNewsById(view.enterNewsToUpdateView());
+							newsModelDTOToUpdate = newsService.readNewsById(view.enterNewsToUpdateView());
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();
@@ -76,7 +76,7 @@ public class Controller {
 			}
 			public void handleRemoveNewsById() {
 					try {
-							newsService.removeNewsById(view.enterNewsToRemoveView());
+							newsService.deleteNewsById(view.enterNewsToRemoveView());
 					} catch (NoSuchNewsException e) {
 							System.out.println(e.getMessage());
 							start();

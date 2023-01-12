@@ -3,6 +3,7 @@ package com.mjc.school.service;
 import com.mjc.school.repository.model.dto.NewsModelDTO;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
+import com.mjc.school.service.implementation.NewsServiceImpl;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import static com.mjc.school.repository.FilePathUtils.NEWS_TXT;
 import static com.mjc.school.repository.FilePathUtils.TEST_TXT;
 import static org.junit.jupiter.api.Assertions.*;
 class NewsModelServiceTest {
-		private final NewsService newsService = new NewsService();
+		private final NewsServiceImpl newsService = new NewsServiceImpl();
 		private final LocalDateTime testDateTime = LocalDateTime.of(2023, Month.JANUARY,10,12,15,10,0);
 		@BeforeEach
 		void setUp() {
@@ -34,30 +35,30 @@ class NewsModelServiceTest {
 		@Test
 		void shouldReturnAListOfAllNews() {
 				int lengthExpected = 2;
-				int lengthActual = newsService.getAllNews().size();
+				int lengthActual = newsService.readAllNews().size();
 				assertEquals(lengthExpected, lengthActual);
 		}
 		@SneakyThrows
 		@Test
 		void shouldReturnNewsDTOObjectWithGivenId() {
 				NewsModelDTO expected = new NewsModelDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
-				assertEquals(expected, newsService.getNewsById(1L));
+				assertEquals(expected, newsService.readNewsById(1L));
 		}
 		@SneakyThrows
 		@Test
 		void shouldThrowExceptionWhenThereIsNoNewsWithSpecificId() {
-				assertThrows(NoSuchNewsException.class, () -> newsService.getNewsById(3L));
+				assertThrows(NoSuchNewsException.class, () -> newsService.readNewsById(3L));
 		}
 		@SneakyThrows
 		@Test
 		void shouldReturnAddedObjectIfValuesAreCorrect() {
 				NewsModelDTO expected = new NewsModelDTO(1L, "testTitle", "testContent", testDateTime, testDateTime, 1L);
-				assertEquals(expected, newsService.addNewNews(expected));
+				assertEquals(expected, newsService.createNewNews(expected));
 		}
 		@Test
 		void shouldThrowExceptionIfValuesAreIncorrect() {
 				NewsModelDTO expected = new NewsModelDTO(1L, "test", "test", testDateTime, testDateTime, 1L);
-				assertThrows(InvalidNewsContentException.class, () -> newsService.addNewNews(expected));
+				assertThrows(InvalidNewsContentException.class, () -> newsService.createNewNews(expected));
 		}
 		@SneakyThrows
 		@Test
@@ -73,10 +74,10 @@ class NewsModelServiceTest {
 		@SneakyThrows
 		@Test
 		void shouldReturnTrueIfNewsWasSuccessfullyRemoved() {
-				assertTrue(newsService.removeNewsById(1L));
+				assertTrue(newsService.deleteNewsById(1L));
 		}
 		@Test
 		void shouldThrowExceptionWhenRemovingNonExistingNews() {
-				assertThrows(NoSuchNewsException.class, () -> newsService.removeNewsById(3L));
+				assertThrows(NoSuchNewsException.class, () -> newsService.deleteNewsById(3L));
 		}
 }

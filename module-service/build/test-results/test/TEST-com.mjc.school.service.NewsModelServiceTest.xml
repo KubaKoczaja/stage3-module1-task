@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mjc.school.service.NewsModelServiceTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-01-12T09:36:21" hostname="DESKTOP-E33MI32" time="0.146">
+  <properties/>
+  <testcase name="shouldReturnAddedObjectIfValuesAreCorrect()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.055"/>
+  <testcase name="shouldReturnTrueIfNewsWasSuccessfullyRemoved()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.026"/>
+  <testcase name="shouldReturnNewsDTOObjectWithGivenId()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.007"/>
+  <testcase name="shouldThrowExceptionWhenThereIsNoNewsWithSpecificId()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.011"/>
+  <testcase name="shouldThrowExceptionWhenRemovingNonExistingNews()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.006"/>
+  <testcase name="shouldReturnAListOfAllNews()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.005"/>
+  <testcase name="shouldThrowExceptionWhenUpdatedValuesAreIncorrect()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.007"/>
+  <testcase name="shouldThrowExceptionIfValuesAreIncorrect()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.007"/>
+  <testcase name="shouldUpdateNewsWithGivenIdWhenValuesOfTitleAndContentAreCorrect()" classname="com.mjc.school.service.NewsModelServiceTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
