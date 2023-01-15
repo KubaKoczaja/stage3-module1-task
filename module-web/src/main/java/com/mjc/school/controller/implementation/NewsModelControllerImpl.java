@@ -2,6 +2,7 @@ package com.mjc.school.controller.implementation;
 
 import com.mjc.school.controller.NewsModelController;
 import com.mjc.school.repository.model.dto.NewsModelDto;
+import com.mjc.school.service.NewsModelService;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.service.implementation.NewsModelServiceImpl;
@@ -11,23 +12,23 @@ import java.util.List;
 
 @NoArgsConstructor
 public class NewsModelControllerImpl implements NewsModelController {
-		private final NewsModelServiceImpl newsServiceDto = new NewsModelServiceImpl();
+		private final NewsModelService newsModelService = new NewsModelServiceImpl();
 
 			public List<NewsModelDto> readAllNewsRequest() {
-					return newsServiceDto.readAllNews();
+					return newsModelService.readAllNews();
 			}
 
 			public NewsModelDto readByIdRequest(Long id) throws NoSuchNewsException {
-							 return newsServiceDto.readById(id);
+							 return newsModelService.readById(id);
 			}
 			public NewsModelDto createNewsRequest(NewsModelDto newsModelDto) throws InvalidNewsContentException {
-							return newsServiceDto.createNewNews(newsModelDto);
+							return newsModelService.createNewNews(newsModelDto);
 			}
 			public NewsModelDto updateNewsRequest(NewsModelDto newsToUpdate) throws NoSuchNewsException, InvalidNewsContentException {
-					newsServiceDto.readById(newsToUpdate.getId());
-					return newsServiceDto.updateNews(newsToUpdate);
+					newsModelService.readById(newsToUpdate.getId());
+					return newsModelService.updateNews(newsToUpdate);
 			}
 			public Boolean deleteByIdRequest(Long newsId) throws NoSuchNewsException {
-							return newsServiceDto.deleteNewsById(newsId);
+							return newsModelService.deleteNewsById(newsId);
 			}
 }
