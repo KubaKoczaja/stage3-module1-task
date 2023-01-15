@@ -7,9 +7,9 @@ import com.mjc.school.service.exception.NoSuchNewsException;
 import java.util.List;
 
 public interface NewsModelController {
-		List<NewsModelDto> handleReadAllNewsRequest();
-		NewsModelDto handleReadById(Long id) throws NoSuchNewsException;
-		NewsModelDto handleCreateNewsRequest(NewsModelDto newsModelDto) throws InvalidNewsContentException;
-		NewsModelDto handleUpdateNewsRequest(NewsModelDto newsToUpdate) throws NoSuchNewsException, InvalidNewsContentException;
-		Boolean handleDeleteById(Long newsId) throws NoSuchNewsException;
+		List<NewsModelDto> readAllNewsRequest();
+		NewsModelDto readByIdRequest(Long id) throws NoSuchNewsException;
+		NewsModelDto createNewsRequest(NewsModelDto newsModelDto) throws InvalidNewsContentException;
+		NewsModelDto updateNewsRequest(NewsModelDto newsToUpdate) throws NoSuchNewsException, InvalidNewsContentException;
+		Boolean deleteByIdRequest(Long newsId) throws NoSuchNewsException;
 }

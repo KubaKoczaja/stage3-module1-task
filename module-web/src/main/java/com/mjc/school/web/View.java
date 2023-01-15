@@ -47,13 +47,13 @@ public class View {
 
 		public void allNewsView() {
 				System.out.println("List of all news");
-				newsModelController.handleReadAllNewsRequest().forEach(System.out::println);
+				newsModelController.readAllNewsRequest().forEach(System.out::println);
 		}
 
 		public void newsByIdView() {
 				System.out.println("Please enter news id:");
 				try {
-						System.out.println(newsModelController.handleReadById(scanner.nextLong()));
+						System.out.println(newsModelController.readByIdRequest(scanner.nextLong()));
 				} catch (NoSuchNewsException e) {
 						System.out.println(e.getMessage());
 						start();
@@ -75,7 +75,7 @@ public class View {
 				newsModelDTO.setLastUpdateDate(LocalDateTime.now());
 				newsModelDTO.setAuthorId(authorId);
 				try {
-						newsModelController.handleCreateNewsRequest(newsModelDTO);
+						newsModelController.createNewsRequest(newsModelDTO);
 				} catch (InvalidNewsContentException e) {
 						System.out.println(e.getMessage());
 						start();
@@ -85,7 +85,7 @@ public class View {
 				scanner.nextLine();
 				System.out.println("Please enter news to remove:");
 				try {
-						newsModelController.handleDeleteById(scanner.nextLong());
+						newsModelController.deleteByIdRequest(scanner.nextLong());
 				} catch (NoSuchNewsException e) {
 						System.out.println(e.getMessage());
 						start();
@@ -106,7 +106,7 @@ public class View {
 				newsModelDtoToUpdate.setContent(content);
 				newsModelDtoToUpdate.setLastUpdateDate(LocalDateTime.now());
 				try {
-						newsModelController.handleUpdateNewsRequest(newsModelDtoToUpdate);
+						newsModelController.updateNewsRequest(newsModelDtoToUpdate);
 				} catch (NoSuchNewsException | InvalidNewsContentException e) {
 						System.out.println(e.getMessage());
 					  start();
