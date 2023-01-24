@@ -14,8 +14,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @NoArgsConstructor
-public class NewsModelServiceImpl implements NewsModelService {
+public class NewsModelServiceImpl implements NewsModelService<NewsModelDto> {
 		private final NewsMapper newsMapper = new NewsMapperImpl();
 		private final NewsModelRepository newsRepository = new NewsModelRepositoryImpl();
 		private final InputValidator inputValidator = new InputValidator();
@@ -23,13 +24,13 @@ public class NewsModelServiceImpl implements NewsModelService {
 		public List<NewsModelDto> readAllNews() {
 				return newsRepository.readAll().stream().map(newsMapper::newsToNewsDTO).toList();
 		}
-		public NewsModelDto readById(Long id) throws NoSuchNewsException {
+		public NewsModelDto readById(Long id) {
 				 if (!inputValidator.validateIfNewsWithIdExists(id, readAllNews())) {
 						 throw new NoSuchNewsException("No news with such id!");
 				 }
 				return newsMapper.newsToNewsDTO(newsRepository.readById(id));
 		}
-		public NewsModelDto createNewNews(NewsModelDto newsModelDTO) throws InvalidNewsContentException {
+		public NewsModelDto createNewNews(NewsModelDto newsModelDTO) {
 				if (!inputValidator.validateProperLengthOfString(newsModelDTO.getTitle(), 5, 30)) {
 						throw new InvalidNewsContentException("Title of message should be between 5 and 30 characters length!");
 				}
@@ -40,7 +41,7 @@ public class NewsModelServiceImpl implements NewsModelService {
 				return newsMapper.newsToNewsDTO(createdNewsModel);
 		}
 
-		public NewsModelDto updateNews (NewsModelDto updatedNewsModelDto) throws InvalidNewsContentException {
+		public NewsModelDto updateNews (NewsModelDto updatedNewsModelDto) {
 				if (!inputValidator.validateProperLengthOfString(updatedNewsModelDto.getTitle(), 5, 30)) {
 						throw new InvalidNewsContentException("Title of message should be between 5 and 30 characters length!");
 				}
@@ -51,7 +52,7 @@ public class NewsModelServiceImpl implements NewsModelService {
 				return newsMapper.newsToNewsDTO(updatedNewsModel);
 		}
 
-		public Boolean deleteNewsById(Long newsId) throws NoSuchNewsException {
+		public Boolean deleteNewsById(Long newsId) {
 				if (!inputValidator.validateIfNewsWithIdExists(newsId, readAllNews())) {
 						throw new NoSuchNewsException("No news with such id!");
 				}

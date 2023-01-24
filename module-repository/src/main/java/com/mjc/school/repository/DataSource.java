@@ -25,7 +25,7 @@ public class DataSource {
 		}
 		public void appendNewsToFile(NewsModel newsModel) {
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
-						bw.append(newsToString(newsModel));
+						bw.write(newsToString(newsModel));
 				} catch (IOException e) {
 						e.printStackTrace();
 				}
@@ -44,13 +44,13 @@ public class DataSource {
 				}
 		}
 
-		public NewsModel stringToNews(String s) {
-				String[] stringArr = s.split("<>");
+		private NewsModel stringToNews(String s) {
+				String[] stringArr = s.split(";");
 				return new NewsModel(Long.parseLong(stringArr[0]),stringArr[1],stringArr[2], LocalDateTime.parse(stringArr[3]),LocalDateTime.parse(stringArr[4]),Long.parseLong(stringArr[5]));
 		}
 
-		public String newsToString(NewsModel newsModel) {
-				StringJoiner sj = new StringJoiner("<>");
+		private String newsToString(NewsModel newsModel) {
+				StringJoiner sj = new StringJoiner(";");
 				return sj.add(newsModel.getId().toString())
 								.add(newsModel.getTitle())
 								.add(newsModel.getContent())

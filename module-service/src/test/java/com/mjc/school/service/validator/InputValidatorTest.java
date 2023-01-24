@@ -12,30 +12,27 @@ class InputValidatorTest {
 		private final InputValidator inputValidator = new InputValidator();
 		private final List<NewsModelDto> testList = List.of(new NewsModelDto(1L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L),
 						new NewsModelDto(2L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L));
-		private final int min = 5;
-		private final int max = 10;
-		private Long newsId;
-		private String testString;
-
+		private final static int MIN = 5;
+		private final static int MAX = 10;
 
 		@Test
 		void shouldReturnFalseIfNewsWithSpecificIdDoesNotExists() {
-				newsId = 3L;
+				Long newsId = 3L;
 				assertFalse(inputValidator.validateIfNewsWithIdExists(newsId, testList));
 		}
 		@Test
 		void shouldReturnTrueIfNewsWithSpecificIdExists() {
-				newsId = 1L;
+				Long newsId = 1L;
 				assertTrue(inputValidator.validateIfNewsWithIdExists(newsId, testList));
 		}
 		@Test
 		void shouldReturnFalseIfLengthIsIncorrect() {
-				testString = "test";
-				assertFalse(inputValidator.validateProperLengthOfString(testString, min, max));
+				String testString = "test";
+				assertFalse(inputValidator.validateProperLengthOfString(testString, MIN, MAX));
 		}
 		@Test
 		void shouldReturnTrueIfLengthIsCorrect() {
-				testString = "test_test";
-				assertTrue(inputValidator.validateProperLengthOfString(testString, min, max));
+				String testString = "test_test";
+				assertTrue(inputValidator.validateProperLengthOfString(testString, MIN, MAX));
 		}
 }

@@ -3,3 +3,9 @@
 /build/
 /.idea/
 /.gradle/
+
+/module-repository/build/
+/module-main/build/
+/module-service/build/
+/module-web/build/
+/solution/

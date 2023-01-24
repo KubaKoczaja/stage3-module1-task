@@ -11,7 +11,7 @@ import java.util.List;
 
 @NoArgsConstructor
 public class NewsModelRepositoryImpl implements NewsModelRepository {
-		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
+		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_CSV);
 		@Override
 		public NewsModel create(NewsModel newsModel) {
 				dataSource.appendNewsToFile(newsModel);
@@ -26,13 +26,13 @@ public class NewsModelRepositoryImpl implements NewsModelRepository {
 		@Override
 		public NewsModel readById(Long id) {
 				List<NewsModel> newsModelList = dataSource.parseNewsFromFile();
-				return newsModelList.get(Math.toIntExact(id - 1));
+			return newsModelList.get(Math.toIntExact(id));
 		}
 
 		@Override
 		public NewsModel update(NewsModel updatedNewsModel) {
 				List<NewsModel> newsModelList = dataSource.parseNewsFromFile();
-				NewsModel newsModelToUpdate = newsModelList.get(Math.toIntExact(updatedNewsModel.getId() - 1));
+				NewsModel newsModelToUpdate = newsModelList.get(Math.toIntExact(updatedNewsModel.getId()));
 				newsModelToUpdate.setTitle(updatedNewsModel.getTitle());
 				newsModelToUpdate.setContent(updatedNewsModel.getContent());
 				newsModelToUpdate.setLastUpdateDate(updatedNewsModel.getLastUpdateDate());
@@ -43,7 +43,7 @@ public class NewsModelRepositoryImpl implements NewsModelRepository {
 		@Override
 		public Boolean deleteById(Long id) {
 				List<NewsModel> newsModelList = new ArrayList<>(dataSource.parseNewsFromFile());
-				newsModelList.remove(Math.toIntExact(id - 1));
+				newsModelList.remove(Math.toIntExact(id));
 				dataSource.saveAllToFile(newsModelList);
 				return Boolean.TRUE;
 		}

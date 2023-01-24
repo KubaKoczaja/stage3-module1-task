@@ -13,9 +13,9 @@ import java.util.Scanner;
 
 public class View {
 		private final Scanner scanner = new Scanner(System.in);
-		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_TXT);
+		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_CSV);
 		private final NewsModelController newsModelController = new NewsModelControllerImpl();
-		public int mainMenu() {
+		private int mainMenu() {
 				System.out.println("""
 						Enter the number of operation:
 						1 - Get all news.
@@ -45,12 +45,12 @@ public class View {
 				} while(menuOption != 0);
 		}
 
-		public void allNewsView() {
+		private void allNewsView() {
 				System.out.println("List of all news");
 				newsModelController.readAllNewsRequest().forEach(System.out::println);
 		}
 
-		public void newsByIdView() {
+		private void newsByIdView() {
 				System.out.println("Please enter news id:");
 				try {
 						System.out.println(newsModelController.readByIdRequest(scanner.nextLong()));
@@ -59,7 +59,7 @@ public class View {
 						start();
 				}
 		}
-		public void createNewsView() {
+		private void createNewsView() {
 				scanner.nextLine();
 				System.out.println("Please enter title:");
 				String title = scanner.nextLine();
@@ -68,7 +68,7 @@ public class View {
 				System.out.println("Please enter Author Id:");
 				Long authorId = scanner.nextLong();
 				NewsModelDto newsModelDTO = new NewsModelDto();
-				newsModelDTO.setId((long) dataSource.parseNewsFromFile().size() + 1);
+				newsModelDTO.setId((long) dataSource.parseNewsFromFile().size());
 				newsModelDTO.setTitle(title);
 				newsModelDTO.setContent(content);
 				newsModelDTO.setCreateDate(LocalDateTime.now());
@@ -81,7 +81,7 @@ public class View {
 						start();
 				}
 		}
-		public void deleteByIdView() {
+		private void deleteByIdView() {
 				scanner.nextLine();
 				System.out.println("Please enter news to remove:");
 				try {
@@ -91,7 +91,7 @@ public class View {
 						start();
 				}
 		}
-		public void updateNewsView() {
+		private void updateNewsView() {
 				scanner.nextLine();
 				System.out.println("Please enter news to update:");
 				Long id = scanner.nextLong();
@@ -112,7 +112,7 @@ public class View {
 					  start();
 				}
 		}
-		public void exitView() {
+		private void exitView() {
 				System.out.println("Exit");
 		}
 }
