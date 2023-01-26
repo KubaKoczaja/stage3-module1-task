@@ -1,66 +1,82 @@
 package com.mjc.school.controller.implementation;
 
-import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.dto.NewsModelDto;
-import com.mjc.school.service.NewsModelService;
+import com.mjc.school.service.exception.InvalidNewsContentException;
+import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.service.implementation.NewsModelServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.whenNew;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(fullyQualifiedNames = "com.mjc.school.*")
+@ExtendWith(MockitoExtension.class)
 class NewsModelControllerTest {
 
-		private NewsModelControllerImpl newsModelController;
-
+		@Mock
 		private NewsModelServiceImpl newsModelService;
 
-		/*
-		* In these test I tried using PowerMock, but it doesn't work. When creating instance of controller it is still using
-		* NewsService created with data from file news.csv. At least it is trying to use data from this file, because it
-		* can't locate it when using relative path (when using absolute path probably it would work)
-		 */
-		@BeforeEach
-		 void setUpt() throws Exception {
-				newsModelService = PowerMockito.mock(NewsModelServiceImpl.class);
-				whenNew(NewsModelServiceImpl.class).withNoArguments().thenReturn(newsModelService);
-				newsModelController = new NewsModelControllerImpl();
-		}
+		@InjectMocks
+		private NewsModelControllerImpl newsModelController;
+
 		@Test
-		void shouldReadAllNews() throws Exception {
+		void shouldReadAllNews() {
 				List<NewsModelDto> list = List.of(new NewsModelDto(1L,"test","test", LocalDateTime.now(), LocalDateTime.now(), 1L),new NewsModelDto(1L,"test","test", LocalDateTime.now(), LocalDateTime.now(), 1L));
 				when(newsModelService.readAllNews()).thenReturn(list);
 				assertEquals(2, newsModelController.readAllNewsRequest().size());
 		}
-		@Disabled
 		@Test
-		void readByIdRequest() {
+		void shouldReturnNewsWithValidId() {
+				NewsModelDto expectedNewsModelDto = new NewsModelDto(1L,"test","test", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(newsModelService.readById(anyLong())).thenReturn(expectedNewsModelDto);
+				assertEquals(expectedNewsModelDto, newsModelController.readByIdRequest(1L));
 		}
-		@Disabled
 		@Test
-		void createNewsRequest() {
+		void shouldThrowExceptionWhenIdIsInvalid() {
+				when(newsModelService.readById(anyLong())).thenThrow(NoSuchNewsException.class);
+				assertThrows(NoSuchNewsException.class, () -> newsModelController.readByIdRequest(1L));
 		}
-		@Disabled
 		@Test
-		void updateNewsRequest() {
+		void shouldCreateNewsRequestWithProperInput() {
+				NewsModelDto expectedNewsModelDto = new NewsModelDto(1L,"test","test", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(newsModelService.createNewNews(any(NewsModelDto.class))).thenReturn(expectedNewsModelDto);
+				assertEquals(expectedNewsModelDto, newsModelController.createNewsRequest(expectedNewsModelDto));
 		}
-		@Disabled
 		@Test
-		void deleteByIdRequest() {
+		void shouldThrowExceptionWhenInputForCreatingNewNewsIsIncorrect() {
+				NewsModelDto incorrectNewsModelDto = new NewsModelDto(1L,"incorrectData","incorrectData", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(newsModelService.createNewNews(any(NewsModelDto.class))).thenThrow(InvalidNewsContentException.class);
+				assertThrows(InvalidNewsContentException.class, () -> newsModelController.createNewsRequest(incorrectNewsModelDto));
+		}
+		@Test
+		void shouldUpdateNewsRequestWhenIdIsCorrect() {
+				NewsModelDto expectedNewsModelDto = new NewsModelDto(1L,"test","test", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(newsModelService.readById(anyLong())).thenReturn(expectedNewsModelDto);
+				when(newsModelService.updateNews(any(NewsModelDto.class))).thenReturn(expectedNewsModelDto);
+				assertEquals(expectedNewsModelDto, newsModelController.updateNewsRequest(expectedNewsModelDto));
+		}
+		@Test
+		void shouldThrowExceptionWhenNewsToUpdateIdIsIncorrect() {
+				NewsModelDto incorrectNewsModelDto = new NewsModelDto(1L,"incorrectData","incorrectData", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(newsModelService.readById(anyLong())).thenThrow(NoSuchNewsException.class);
+				assertThrows(NoSuchNewsException.class, () -> newsModelController.updateNewsRequest(incorrectNewsModelDto));
+		}
+		@Test
+		void shouldDeleteNewsWithGivenCorrectId() {
+				when(newsModelService.deleteNewsById(anyLong())).thenReturn(true);
+				assertTrue(newsModelController.deleteByIdRequest(1L));
+		}
+		@Test
+		void shouldThrowExceptionDuringDeletingWhenIdIsIncorrect() {
+				when(newsModelService.deleteNewsById(anyLong())).thenThrow(NoSuchNewsException.class);
+				assertThrows(NoSuchNewsException.class, () -> newsModelController.deleteByIdRequest(1L));
 		}
 }

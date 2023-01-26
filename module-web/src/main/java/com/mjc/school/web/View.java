@@ -1,20 +1,22 @@
 package com.mjc.school.web;
 
 import com.mjc.school.controller.NewsModelController;
-import com.mjc.school.controller.implementation.NewsModelControllerImpl;
 import com.mjc.school.repository.DataSource;
 import com.mjc.school.repository.FilePathUtils;
 import com.mjc.school.repository.model.dto.NewsModelDto;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+
+@RequiredArgsConstructor
 public class View {
 		private final Scanner scanner = new Scanner(System.in);
 		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_CSV);
-		private final NewsModelController newsModelController = new NewsModelControllerImpl();
+		private final NewsModelController newsModelController;
 		private int mainMenu() {
 				System.out.println("""
 						Enter the number of operation:

@@ -1,101 +1,101 @@
 package com.mjc.school.service;
 
+import com.mjc.school.repository.NewsModelRepository;
+import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.dto.NewsModelDto;
 import com.mjc.school.service.exception.InvalidNewsContentException;
 import com.mjc.school.service.exception.NoSuchNewsException;
 import com.mjc.school.service.implementation.NewsModelServiceImpl;
-import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
+import com.mjc.school.service.mapper.NewsMapper;
+import com.mjc.school.service.validator.InputValidator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.List;
 
-import static com.mjc.school.repository.FilePathUtils.TEST_CSV;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 class NewsModelServiceTest {
-		private final NewsModelService<NewsModelDto> newsService = new NewsModelServiceImpl();
+		@InjectMocks
+		private NewsModelServiceImpl newsService;
+		@Mock
+		private NewsModelRepository newsModelRepository;
+		@Mock
+		private NewsMapper newsMapper;
+		@Mock
+		private InputValidator inputValidator;
 		private final LocalDateTime testDateTime = LocalDateTime.of(2023, Month.JANUARY,10,12,15,10,0);
-		/*
-		* Here I tried to make this test use files with absolute paths from FilePathUtils, but as I mentioned on Slack it's not
-		* working. Test can't locate them. When I used absolute path I did something like this:
-		* try {
-						Path news = Path.of(NEWS_TXT);
-						Files.deleteIfExists(news);
-						Files.copy(Path.of(TEST_TXT), news);
-				} catch (IOException e) {
-						throw new RuntimeException(e);
-		* and it worked since all instances where created with this test data
-		 */
-		@BeforeEach
-		void setUp() {
-				try {
-						URL resourceTest = getClass().getClassLoader().getResource("test.csv");
-						File fileTest = new File(resourceTest.toURI());
-						System.out.println(fileTest);
-						URL resourceNews = getClass().getClassLoader().getResource("news.csv");
-						File fileNews = new File(resourceNews.toURI());
-						System.out.println(fileNews);
-						Files.deleteIfExists(fileNews.toPath());
-						Files.copy(fileTest.toPath(), fileNews.toPath());
-				} catch (IOException | URISyntaxException e) {
-						e.printStackTrace();
-				}
-		}
-		
 
 		@Test
 		void shouldReturnAListOfAllNews() {
+				List<NewsModel> newsModelList = List.of(new NewsModel(), new NewsModel());
+				when(newsMapper.newsToNewsDTO(any(NewsModel.class))).thenReturn(new NewsModelDto());
+				when(newsModelRepository.readAll()).thenReturn(newsModelList);
 				int lengthExpected = 2;
-				int lengthActual = newsService.readAllNews().size();
-				assertEquals(lengthExpected, lengthActual);
+				assertEquals(lengthExpected, newsService.readAllNews().size());
 		}
-		@SneakyThrows
 		@Test
 		void shouldReturnNewsDTOObjectWithGivenId() {
-				NewsModelDto expected = new NewsModelDto(1L, "test", "test", testDateTime, testDateTime, 1L);
+				NewsModelDto expected = new NewsModelDto(1L, "test", "test", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(true);
+				when(newsModelRepository.readById(anyLong())).thenReturn(new NewsModel());
+				when(newsMapper.newsToNewsDTO(any(NewsModel.class))).thenReturn(expected);
 				assertEquals(expected, newsService.readById(1L));
 		}
-		@SneakyThrows
 		@Test
 		void shouldThrowExceptionWhenThereIsNoNewsWithSpecificId() {
+				when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(false);
 				assertThrows(NoSuchNewsException.class, () -> newsService.readById(3L));
 		}
-		@SneakyThrows
 		@Test
 		void shouldReturnAddedObjectIfValuesAreCorrect() {
-				NewsModelDto expected = new NewsModelDto(1L, "testTitle", "testContent", testDateTime, testDateTime, 1L);
+				NewsModelDto expected = new NewsModelDto(1L, "testTitle", "testContent", LocalDateTime.now(), LocalDateTime.now(), 1L);
+				lenient().when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(true);
+				when(inputValidator.validateProperLengthOfString(anyString(), anyInt(), anyInt())).thenReturn(true);
+				lenient().when(newsMapper.newsDTOToNews(any(NewsModelDto.class))).thenReturn(new NewsModel());
+				lenient().when(newsModelRepository.readById(anyLong())).thenReturn(new NewsModel());
 				assertEquals(expected, newsService.createNewNews(expected));
 		}
 		@Test
 		void shouldThrowExceptionIfValuesAreIncorrect() {
-				NewsModelDto expected = new NewsModelDto(1L, "test", "test", testDateTime, testDateTime, 1L);
-				assertThrows(InvalidNewsContentException.class, () -> newsService.createNewNews(expected));
+				NewsModelDto incorrectNewsModelDto = new NewsModelDto(1L, "incorrectData", "incorrectData", testDateTime, testDateTime, 1L);
+				lenient().when(inputValidator.validateProperLengthOfString(anyString(), anyInt(), anyInt())).thenReturn(false);
+				assertThrows(InvalidNewsContentException.class, () -> newsService.createNewNews(incorrectNewsModelDto));
 		}
-		@SneakyThrows
 		@Test
 		void shouldUpdateNewsWithGivenIdWhenValuesOfTitleAndContentAreCorrect() {
 				NewsModelDto expected = new NewsModelDto(1L, "new_title", "new_content", testDateTime, testDateTime, 1L);
+				lenient().when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(true);
+				when(inputValidator.validateProperLengthOfString(anyString(), anyInt(), anyInt())).thenReturn(true);
+				lenient().when(newsMapper.newsDTOToNews(any(NewsModelDto.class))).thenReturn(new NewsModel());
+				lenient().when(newsModelRepository.readById(anyLong())).thenReturn(new NewsModel());
 				assertEquals(expected, newsService.updateNews(expected));
 		}
+
 		@Test
 		void shouldThrowExceptionWhenUpdatedValuesAreIncorrect() {
-				NewsModelDto expected = new NewsModelDto(1L, "new", "new_content", testDateTime, testDateTime, 1L);
-				assertThrows(InvalidNewsContentException.class, () -> newsService.updateNews(expected));
+				NewsModelDto incorrectNewsModelDto = new NewsModelDto(1L, "incorrectData", "incorrectData", testDateTime, testDateTime, 1L);
+				when(inputValidator.validateProperLengthOfString(anyString(), anyInt(), anyInt())).thenReturn(false);
+				assertThrows(InvalidNewsContentException.class, () -> newsService.updateNews(incorrectNewsModelDto));
 		}
-		@SneakyThrows
 		@Test
 		void shouldReturnTrueIfNewsWasSuccessfullyRemoved() {
+				when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(true);
+				when(newsModelRepository.deleteById(anyLong())).thenReturn(true);
 				assertTrue(newsService.deleteNewsById(1L));
 		}
 		@Test
 		void shouldThrowExceptionWhenRemovingNonExistingNews() {
+				when(inputValidator.validateIfNewsWithIdExists(anyLong(), anyList())).thenReturn(false);
 				assertThrows(NoSuchNewsException.class, () -> newsService.deleteNewsById(3L));
 		}
 }

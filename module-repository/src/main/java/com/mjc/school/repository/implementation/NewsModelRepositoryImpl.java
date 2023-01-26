@@ -1,17 +1,16 @@
 package com.mjc.school.repository.implementation;
 
 import com.mjc.school.repository.DataSource;
-import com.mjc.school.repository.FilePathUtils;
 import com.mjc.school.repository.NewsModelRepository;
 import com.mjc.school.repository.model.NewsModel;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class NewsModelRepositoryImpl implements NewsModelRepository {
-		private final DataSource dataSource = new DataSource(FilePathUtils.NEWS_CSV);
+		private final DataSource dataSource;
 		@Override
 		public NewsModel create(NewsModel newsModel) {
 				dataSource.appendNewsToFile(newsModel);
